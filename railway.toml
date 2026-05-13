@@ -1,0 +1,16 @@
+﻿[build]
+builder = "dockerfile"
+dockerfilePath = "./Dockerfile"
+
+[deploy]
+startCommand = "bash start.sh"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
+
+[variables]
+PORT = "8000"
+ENVIRONMENT = "production"
+
+[[services]]
+name = "chm-app"
+healthCheck = { path = "/health", interval = 30, timeout = 10, startPeriod = 60 }
